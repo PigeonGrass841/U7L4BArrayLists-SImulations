@@ -74,7 +74,8 @@ public class Address {
         this.address += ", " + this.city + ", " + this.state + " " + this.zipCode;
     }
 
-    //Takes in an Address Object as a parameter and compares it to the current object. It will return true if they are the same and false if not.
+    //Takes in an Address Object as a parameter and compares it to the current object. It will return true if they are
+    //the same and false if not.
     public boolean compareAddressTo(Address info)
     {
         if (info.getAddress().equals(this.address))
