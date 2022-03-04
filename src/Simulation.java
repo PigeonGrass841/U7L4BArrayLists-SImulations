@@ -1,47 +1,47 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Simulation
 {
     public static void main(String[] args)
     {
-        //Takes in the separate pieces of the address and assigns them to the proper fields. (Apartment number)
-        Address address1 = new Address("1313", "Mockingbird Lane", "Apt 6A", "Springfield", "MO", "65123");
-        System.out.println(address1);
-        //Takes in the separate pieces of the address and assigns them to the proper fields. (No apartment number)
-        Address address2 = new Address("1313", "Mockingbird Lane", "Springfield", "MO", "65123");
-        System.out.println(address2);
+        String base = "1313 Mockingbird Lane Apt 6A, Springfield, MO ";
+        ArrayList<Package> packages = new ArrayList<Package>();
+        int[] zipCodes = {11368, 11385, 11365, 11374, 11377, 11355, 11375, 11691, 11372, 11434, 11432, 11435, 11354, 11420, 11419, 11413, 11365, 11374, 11367, 11421, 11357, 11101, 11418, 11412, 11106, 11379, 11378, 11358, 11105, 11433, 11364, 11103, 11369, 11102, 11422, 11417, 11001, 11423, 11361, 11416, 11414, 11429, 11104, 11370, 11356, 11427, 11692, 11426, 11694, 11411, 11428, 11436, 11360, 11362, 11415, 11366, 11004, 11693, 11096, 11363, 11697, 11439, 11005, 11109, 11424, 11430, 11425, 11359, 11120, 11351, 11352, 11371, 11380, 11381, 11386, 11390, 11405, 11431, 11451, 11499, 11690, 11695, 11437};
 
-        System.out.println("---------------");
+        System.out.print("How many packages do you want to simulate?: ");
+        Scanner input = new Scanner(System.in);
+        int num = input.nextInt();
 
-        //Takes in an address object and copies its information into the fields. (Apartment number)
-        Address address3 = new Address(address1);
-        System.out.println(address3);
-        //Takes in an address object and copies its information into the fields. (No apartment number)
-        Address address4 = new Address(address2);
-        System.out.println(address4);
+        int zip = zipCodes[((int)(Math.random() * zipCodes.length))];
+        double weight = 0;
+        Address origin = new Address(base + zip);
+        Address destination = new Address(base + zip);
 
-        System.out.println("---------------");
+        for (int i = 0; i < num; i++)
+        {
+            zip = zipCodes[((int)(Math.random() * zipCodes.length))];
+            origin = new Address(base + zip);
 
-        //Takes in an address as a String, breaks up the information, and copies it into the fields. (Apartment Number)
-        Address address5 = new Address("1313 Mockingbird Lane Apt 6A, Springfield, MO 65123");
-        System.out.println(address5);
-        //Takes in an address as a String, breaks up the information, and copies it into the fields. (No apartment number)
-        Address address6 = new Address("1313 Mockingbird Lane, Springfield, MO 65123");
-        System.out.println(address6);
+            zip = zipCodes[((int)(Math.random() * zipCodes.length))];
+            destination = new Address(base + zip);
 
-        System.out.println("---------------");
+            while (weight < 0.1)
+            {
+                weight = (int) (Math.random() * 100);
+            }
 
-        //Takes in an address1 as a parameter and compares it to the current object. It will return true if they are the same and false if not.
-        System.out.println(address1.compareAddressTo(address2));
-        System.out.println(address1.compareAddressTo(address3));
-        System.out.println(address1.compareAddressTo(address4));
-        System.out.println(address1.compareAddressTo(address5));
-        System.out.println(address1.compareAddressTo(address6));
+            packages.add(new Package(origin, destination, weight));
+        }
 
-        System.out.println("---------------");
-
-        //Takes in an address2 as a parameter and compares it to the current object. It will return true if they are the same and false if not.
-        System.out.println(address2.compareAddressTo(address3));
-        System.out.println(address2.compareAddressTo(address4));
-        System.out.println(address2.compareAddressTo(address5));
-        System.out.println(address2.compareAddressTo(address6));
+        for (int i = 0; i < packages.size(); i++)
+        {
+            System.out.println("Package " + (i + 1) + " Test: ");
+            System.out.println("Package was sent from: " + origin);
+            System.out.println("Package was sent to: " + destination);
+            System.out.println("Package weighted: " + weight + " pounds");
+            System.out.println("Package postage was worth: $" + PostageCalculator.calculatePostage(packages.get(i)));
+            System.out.println("---------------");
+        }
     }
 }

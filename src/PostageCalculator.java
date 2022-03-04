@@ -1,10 +1,9 @@
 public class PostageCalculator {
-    private final double BASE_COST = 3.75;
-    private final double EXPENSE = 0.05;
-
     //Takes in the package.
-    public double calculatePostage(Package items)
+    public static double calculatePostage(Package items)
     {
+        final double BASE_COST = 3.75;
+        final double EXPENSE = 0.05;
         double weightCost = (items.getWeight() / 0.1) * EXPENSE;
         double originCountyCode = Integer.parseInt(items.getOrigin().getZipCode().substring(0, 3));
         double destinationCountyCode = Integer.parseInt(items.getDestination().getZipCode().substring(0, 3));
@@ -13,8 +12,10 @@ public class PostageCalculator {
     }
 
     //Takes in the 2 zip codes and the weight of the package.
-    public double calculatePostage(String originZipCode, String destinationZipCode, double weight)
+    public static double calculatePostage(String originZipCode, String destinationZipCode, double weight)
     {
+        final double BASE_COST = 3.75;
+        final double EXPENSE = 0.05;
         double weightCost = (weight / 0.1) * EXPENSE;
         double originCountyCode = Integer.parseInt(originZipCode.substring(0, 3));
         double destinationCountyCode = Integer.parseInt(destinationZipCode.substring(0, 3));
@@ -23,8 +24,10 @@ public class PostageCalculator {
     }
 
     //Takes in the 2 addresses and the weight of the package.
-    public double calculatePostage(Address origin, Address destination, double weight)
+    public static double calculatePostage(Address origin, Address destination, double weight)
     {
+        final double BASE_COST = 3.75;
+        final double EXPENSE = 0.05;
         double weightCost = (weight / 0.1) * EXPENSE;
         double originCountyCode = Integer.parseInt(origin.getZipCode().substring(0, 3));
         double destinationCountyCode = Integer.parseInt(destination.getZipCode().substring(0, 3));

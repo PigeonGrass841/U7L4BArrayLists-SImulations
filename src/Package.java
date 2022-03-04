@@ -9,10 +9,7 @@ public class Package {
     {
         this.origin = origin;
         this.destination = destination;
-        if (weight >= 0.1)
-        {
-            this.weight = weight;
-        }
+        this.weight = weight;
     }
 
     public Address getOrigin()
