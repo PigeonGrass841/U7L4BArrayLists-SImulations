@@ -17,6 +17,9 @@ public class Simulation
         double weight = 0;
         Address origin = new Address(base + zip);
         Address destination = new Address(base + zip);
+        double height = 2;
+        double length = 2;
+        double width = 2;
 
         for (int i = 0; i < num; i++)
         {
@@ -26,20 +29,22 @@ public class Simulation
             zip = zipCodes[((int)(Math.random() * zipCodes.length))];
             destination = new Address(base + zip);
 
-            while (weight < 0.1)
-            {
-                weight = (int) (Math.random() * 100);
-            }
+            weight = (int) (Math.random() * 100) + 0.1;
 
-            packages.add(new Package(origin, destination, weight));
+            height = (int) (Math.random() * 99) + 2;
+            length = (int) (Math.random() * 99) + 2;
+            width = (int) (Math.random() * 99) + 2;
+
+            packages.add(new Package(origin, destination, weight, height, length, width));
         }
 
         for (int i = 0; i < packages.size(); i++)
         {
             System.out.println("Package " + (i + 1) + " Test: ");
-            System.out.println("Package was sent from: " + origin);
-            System.out.println("Package was sent to: " + destination);
-            System.out.println("Package weighted: " + weight + " pounds");
+            System.out.println("Package was sent from: " + packages.get(i).getOrigin());
+            System.out.println("Package was sent to: " + packages.get(i).getDestination());
+            System.out.println("Package weight was: " + packages.get(i).getWeight() + " pounds");
+            System.out.println("Package size was: " + packages.get(i).getSize() + " inches");
             System.out.println("Package postage was worth: $" + PostageCalculator.calculatePostage(packages.get(i)));
             System.out.println("---------------");
         }
